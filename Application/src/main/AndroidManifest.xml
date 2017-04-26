@@ -23,8 +23,8 @@
 
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
 
-    <!-- TODO: ADD PERMISSIONS HERE -->
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +39,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="BluetoothAdapter.ACTION_REQUEST_ENABLE"/>
             </intent-filter>
         </activity>
 

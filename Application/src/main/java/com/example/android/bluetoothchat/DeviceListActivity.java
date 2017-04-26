@@ -103,6 +103,13 @@ public class DeviceListActivity extends Activity {
         /**
          * TODO: Register the BroadcastReceiver (mReceiver) to respond to intents with the ACTION_FOUND and ACTION_DISCOVERY_FINISHED actions
          */
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(mReceiver, intentFilter);
+        IntentFilter intentFilter2 = new IntentFilter();
+        intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        registerReceiver(mReceiver, intentFilter2);
+
 
 
         // Get the local Bluetooth adapter
@@ -150,10 +157,14 @@ public class DeviceListActivity extends Activity {
         findViewById(R.id.title_new_devices).setVisibility(View.VISIBLE);
 
         /**
-         * TODO: If the adapter is discoverying, cancel that discovery
+         * TODO: If the adapter is discovering, cancel that discovery
          * TODO: Either way, then tell the adapter to startDiscovery
          */
-
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+        bluetoothAdapter.startDiscovery();
     }
 
     /**
